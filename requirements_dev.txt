@@ -12,11 +12,14 @@ pytest
 black
 tqdm
 hydra-core
+dynaconf[all]
 prometheus-client
 sentry-sdk
 apache-skywalking[all]
 loguru
 requests
+aiohttp
+aiodns
 beautifulsoup4
 lxml
 html5lib

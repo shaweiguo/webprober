@@ -34,16 +34,23 @@
 # if __name__ == '__main__':
 #     typer.run(main)
 import typer
-import hydra
-from omegaconf import DictConfig, OmegaConf
+# import hydra
+# from omegaconf import DictConfig, OmegaConf
+from config import settings
 
 
 app = typer.Typer()
+
+def test_dynaconf() -> None:
+    print(settings.db.host)
+    print(settings.app.name)
+    print(settings.password)
 
 
 @app.command()
 def create():
     print("Creating user: Hiro Hamada")
+    test_dynaconf()
 
 
 @app.command()
