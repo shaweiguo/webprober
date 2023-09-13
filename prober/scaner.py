@@ -27,10 +27,19 @@ async def scan_port(ip, port):
         pass
 
 async def scan_ip(ip):
-    tasks = []
-    for port in range(1, 65536):
+    seg_num = 1024
+    num = 65535 // seg_num
+    for i in range(0, num):
+        for j in range(seg_num):
+            port = i * seg_num + j + 1
+            tasks = []
+            tasks.append(scan_port(str(ip), port))
+            await asyncio.gather(*tasks)
+    for port in range((num + 1)*seg_num, 65535):
+        tasks = []
         tasks.append(scan_port(str(ip), port))
-    await asyncio.gather(*tasks)
+        await asyncio.gather(*tasks)
+
 
 def run_scan(ip, max_processes):
     loop = asyncio.new_event_loop()
