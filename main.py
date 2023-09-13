@@ -37,10 +37,12 @@ import typer
 # import hydra
 # from omegaconf import DictConfig, OmegaConf
 from config import settings
+from prober import scan
+import asyncio
 
 
 app = typer.Typer()
-
+loop = None
 def test_dynaconf() -> None:
     print(settings.db.host)
     print(settings.app.name)
@@ -53,10 +55,13 @@ def create():
     test_dynaconf()
 
 
-@app.command()
-def delete():
-    print("Deleting user: Hiro Hamada")
+@app.command('scan')
+def scan_web():
+    subnet = settings.scan.network
+    nums = settings.scan.nums
+    asyncio.run(scan.scan_network(nums, subnet))
 
 
 if __name__ == "__main__":
+    loop = asyncio.get_event_loop()
     app()

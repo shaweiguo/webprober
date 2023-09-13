@@ -7,3 +7,6 @@ db:
   name: mydb
   user: myuser
   password: mypassword
+scan:
+  network: 192.168.6.0/24
+  nums: 100
