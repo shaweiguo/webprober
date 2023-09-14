@@ -26,3 +26,7 @@ html5lib
 rx
 psutil
 python-nmap
+paramiko
+Netmiko
+Nornir
+PyEZ
