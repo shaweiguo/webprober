@@ -7,7 +7,7 @@ async def producer(name, queue):
     n = random.randint(0, 10)
     await asyncio.sleep(n)
     await queue.put(n)
-    logger.info(f"Producer {name} adds to the queue")
+    logger.info(f"Producer {name} adds {n} to the queue")
 
 async def consumer(name, queue):
     while True:

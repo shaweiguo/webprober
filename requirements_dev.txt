@@ -32,3 +32,9 @@ Nornir
 PyEZ
 grpcio
 pygeocoder
+trio
+celery[redis]
+# pyamqp
+eventlet
+dramatiq[redis, watch]
+scoop
