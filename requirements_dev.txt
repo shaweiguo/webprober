@@ -32,4 +32,3 @@ Nornir
 PyEZ
 grpcio
 pygeocoder
-mpi4py
