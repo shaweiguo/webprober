@@ -38,3 +38,27 @@ celery[redis]
 eventlet
 dramatiq[redis, watch]
 scoop
+numba
+cuda-python
+pyopencl
+intel-opencl-rt
+astropy
+astroquery
+astroplan
+astroML
+quandl
+pyfolio
+# zeppelin
+# termios
+# curses
+pynput
+tqdm
+dask
+graphviz
+dask-ml
+jupyterlab
+networkx[default]
+scikit-network
+python3-memcached
+pymemcache
+pyzmq
