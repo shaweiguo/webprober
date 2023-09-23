@@ -62,3 +62,6 @@ scikit-network
 python3-memcached
 pymemcache
 pyzmq
+docker
+etcd3
+cilium-cli

@@ -65,9 +65,9 @@ def start_thread(func, *args):
     th.start()
 
 def quepi(zcontext):
-    pubsub = 'tcp://localhost:6700'
-    reqrep = 'tcp://localhost:6701'
-    pushpull = 'tcp://localhost:6702'
+    pubsub = 'tcp://127.0.0.1:6700'
+    reqrep = 'tcp://127.0.0.1:6701'
+    pushpull = 'tcp://127.0.0.1:6702'
 
     start_thread(bitsource, zcontext, pubsub)
     start_thread(always_yes, zcontext, pubsub, pushpull)
