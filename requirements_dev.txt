@@ -67,4 +67,5 @@ docker
 etcd3
 # cilium-cli
 poetry
-cookiecutter-data-science
+# cookiecutter-data-science
+vllm
