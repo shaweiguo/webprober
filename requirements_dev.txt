@@ -20,6 +20,7 @@ loguru
 requests
 aiohttp
 aiodns
+asyncpg
 beautifulsoup4
 lxml
 html5lib
@@ -69,3 +70,4 @@ etcd3
 poetry
 # cookiecutter-data-science
 vllm
+transformers
