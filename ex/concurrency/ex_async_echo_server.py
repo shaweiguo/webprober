@@ -2,6 +2,7 @@ import asyncio
 import os
 import signal
 import socket
+from types import TracebackType
 import typing
 
 from loguru import logger
@@ -80,5 +81,43 @@ def main():
         loop.close()
 
 
+class ConnectedSocket:
+    def __init__(self, server_socket):
+        self._connection = None
+        self._server_socket = server_socket
+
+    async def __aenter__(self):
+        logger.info('Entering context manager, waiting for connection')
+        loop = asyncio.get_event_loop()
+        connection, address = await loop.sock_accept(self._server_socket)
+        self._connection = connection
+        logger.info(f'Accepted a connection from {address}')
+        return self._connection
+
+    async def __aexit__(self,
+                        exc_type: typing.Optional[typing.Type[BaseException]],
+                        exc_value: typing.Optional[BaseException],
+                        exc_tb: typing.Optional[TracebackType]):
+        logger.info('Exiting context manager')
+        self._connection.close()
+        logger.info('Closed connection')
+
+
+async def async_serve():
+    loop = asyncio.get_event_loop()
+
+    server_socket = socket.socket()
+    server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    server_address = ('localhost', 8000)
+    server_socket.setblocking(False)
+    server_socket.bind(server_address)
+    server_socket.listen()
+
+    async with ConnectedSocket(server_socket) as connection:
+        data = await loop.sock_recv(connection, 1024)
+        logger.info(f'Received data: {data}')
+
+
 if __name__ == '__main__':
-    main()
+    # main()
+    asyncio.run(async_serve())
