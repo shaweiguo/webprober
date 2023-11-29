@@ -91,7 +91,7 @@ def change_alpha(value):
     alpha = float(value) / 100
 
 
-def blend_tow_images(image_1, image_2):
+def blend_two_images(image_1, image_2):
     global alpha
     alpha = 0.5
     title = "Blend Two Images"
@@ -110,8 +110,29 @@ def blend_tow_images(image_1, image_2):
     cv2.destroyAllWindows()
 
 
+def blend_two_images_with_mask(image_1, image_2):
+    title = "Blend Two Images"
+    p = processor.ImageProcessor(title, image_1)
+    p.show(title="Original Image 1", image=p._image)
+
+    to_blend = cv2.imread(image_2)
+    p.show(title="Original Image 2", image=to_blend)
+    _, mask = p.remove_background_by_color(
+        hsv_lower=(90, 0, 100),
+        hsv_upper=(179, 255, 255),
+        image=to_blend
+    )
+    p.show(title="Mask from Original Image2", image=mask)
+    p.show(title="(1-Mask)", image=(255 - mask))
+    blend = p.blend_with_mask(to_blend, mask)
+    p.show(title=title, image=blend)
+
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+
 if __name__ == "__main__":
     image1 = "/home/sha/Downloads/star.jpg"
-    image2 = "/home/sha/Downloads/sea.jpg"
-    blend_tow_images(image1, image2)
+    image2 = "/home/sha/Downloads/bird.jpg"
+    blend_two_images_with_mask(image1, image2)
     # adjust_hsv()
