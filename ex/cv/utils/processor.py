@@ -87,3 +87,15 @@ class ImageProcessor(object):
         blend = cv2.resize(blend, image.shape[1::-1])
         mask = cv2.resize(mask, image.shape[1::-1])
         return cv2.bitwise_and(blend, mask) + cv2.bitwise_and(image, 255 - mask)
+
+    def perspective_warp(self, points, width, height, image=None):
+        if image is None:
+            image = self._image
+        pts_source = np.float32([
+            points[0], points[1], points[3], points[2]
+        ])
+        pts_target = np.float32([
+            [0, 0], [width, 0], [0, height], [width, height]
+        ])
+        matrix = cv2.getPerspectiveTransform(pts_source, pts_target)
+        return cv2.warpPerspective(image, matrix, (width, height))
