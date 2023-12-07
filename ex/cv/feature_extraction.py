@@ -25,7 +25,7 @@ def LBP(image_path):
 
 
 if __name__ == '__main__':
-    image_path = '/home/sha/Downloads/peoples2.jpg'
+    image_path = '/home/sha/Downloads/jiasha.jpg'
     
     LBP(image_path)
     
